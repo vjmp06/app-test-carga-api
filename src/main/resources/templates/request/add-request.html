@@ -1,0 +1,62 @@
+<section>
+  <h3>Adicionar Request</h3>
+  <form action="#"
+        th:action="@{/add-request/{apiId}(apiId=${api.id})}"
+        th:object="${request}"
+        method="post">
+    <div class="form-row">
+      <div class="col">
+        <label for="nome">Nome</label>
+        <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Nome Request">
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+      </div>
+      <div class="col">
+        <label for="verboHttp">Verbo</label>
+        <select th:field="*{verboHttp}" id="verboHttp" class="form-control">
+          <option th:each="verbos : ${T(br.com.vinicius.testecargaapi.dataprovider.model.VerboHttp).values()}"
+                  th:value="${verbos}" th:text="${verbos}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('verboHttp')}" th:errors="*{verboHttp}"></span>
+      </div>
+      <div class="col">
+        <label for="quantidadeThreads">Qtd Threads</label>
+        <input type="text" th:field="*{quantidadeThreads}" class="form-control" id="quantidadeThreads" placeholder="Verbo Request">
+        <span th:if="${#fields.hasErrors('quantidadeThreads')}" th:errors="*{quantidadeThreads}"></span>
+      </div>
+      <div class="col">
+        <label for="quantidadeRequests">Qtd Requests</label>
+        <input type="text"  th:field="*{quantidadeRequests}" class="form-control" id="quantidadeRequests" placeholder="Verbo Request">
+        <span th:if="${#fields.hasErrors('quantidadeRequests')}" th:errors="*{quantidadeRequests}"></span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <label for="path">Path</label>
+        <input type="text" th:field="*{path}" class="form-control" id="path" placeholder="Path Request">
+        <span th:if="${#fields.hasErrors('path')}" th:errors="*{path}"></span>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="col">
+        <label for="headers">Headers</label>
+        <textarea type="text"  th:field="*{headers}" class="form-control" id="headers" placeholder="Headers"></textarea>
+        <span th:if="${#fields.hasErrors('headers')}" th:errors="*{headers}"></span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="body">Body</label>
+        <textarea type="text" th:field="*{body}" class="form-control" id="body" placeholder="Body"></textarea>
+        <span th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col" style="margin-top: 10px;">
+        <input type="submit" class="btn btn-primary" value="Adicionar Request">
+      </div>
+    </div>
+  </form>
+</section>

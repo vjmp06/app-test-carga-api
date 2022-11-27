@@ -1,0 +1,45 @@
+<div th:switch="${api.requests}" class="container my-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 th:case="null">No requests yet!</h2>
+      <div th:case="*">
+        <h2 class="my-5">Requests</h2>
+        <div class="container my-5" style="display: none;" id="add-request" th:insert="~{request/add-request}"></div>
+        <div class="container my-5" th:style="*{update}" id="update-request" th:insert="~{request/update-request}"></div>
+        <table class="table table-striped table-responsive-md">
+          <thead>
+          <tr>
+            <th>Request</th>
+            <th>Verbo Http</th>
+            <th>Path</th>
+            <th>Headers</th>
+            <th>Body</th>
+            <th>Qtd Threads</th>
+            <th>Qtd Requests</th>
+            <th>Run</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="request : ${api.requests}">
+            <td th:text="${request.nome}"></td>
+            <td th:text="${request.verboHttp}"></td>
+            <td th:text="${request.path}"></td>
+            <td th:text="${request.headers}"></td>
+            <td th:text="${request.body}"></td>
+            <td th:text="${request.quantidadeThreads}"></td>
+            <td th:text="${request.quantidadeRequests}"></td>
+            <td><button class="btn btn-primary" th:onClick="'javascript:runRequests('+ ${request.id} +')'"><i class="fas fa-play"></i></button></td>
+            <td><a th:href="@{/edit-request/{idApi}/request/{idRequest} (idApi=${api.id}, idRequest=${request.id})}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
+            <td><a th:href="@{/delete-request/{idApi}/request/{idRequest}(idApi=${api.id}, idRequest=${request.id})}" class="btn btn-primary"><i class="fas fa-trash"></i></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="run" class="col-md-12" style="background-color: black; color: white; display: none;">
+      </div>
+      <p class="my-5"><button class="btn btn-primary" onclick="showCadastrarRequest();"><i class="fas fa-plus"></i></button></p>
+    </div>
+  </div>
+</div>

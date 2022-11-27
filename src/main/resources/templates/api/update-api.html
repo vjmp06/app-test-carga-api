@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Apis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+<div class="container my-5">
+  <section>
+    <h2>Alterar Api</h2>
+    <form action="#"
+          th:action="@{/update-api/{id}(id=${api.id})}"
+          th:object="${api}"
+          method="post">
+      <div class="form-row">
+        <div class="col">
+          <label for="nome">Nome</label>
+          <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Nome">
+          <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        </div>
+        <div class="col">
+          <label for="urlBase">Url Base</label>
+          <input type="text" th:field="*{urlBase}" class="form-control" id="urlBase" placeholder="Url Base">
+          <span th:if="${#fields.hasErrors('urlBase')}" th:errors="*{urlBase}"></span>
+        </div>
+        <div class="col-auto" style="margin-top:33px;">
+          <input type="submit" class="btn btn-primary" value="Atualizar api">
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
+<div th:insert="~{request/index-request}"></div>
+<script>
+  function showCadastrarRequest() {
+    document.getElementById("add-request").style.display = 'block';
+    document.getElementById("update-request").style.display = 'none';
+  }
+  function showAtualizarRequest() {
+    document.getElementById("update-request").style.display = 'block';
+    document.getElementById("add-request").style.display = 'none';
+  }
+  const xhttp = new XMLHttpRequest();
+  function runRequests(idRequest) {
+    xhttp.onload = function() {
+      document.getElementById("run").innerHTML = this.responseText;
+    }
+    xhttp.open("GET", "/teste/run-requests/" + idRequest)
+    xhttp.send();
+    document.getElementById("run").style.display = 'block';
+  }
+</script>
+</body>
+</html>
+
+

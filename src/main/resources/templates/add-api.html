@@ -1,0 +1,23 @@
+
+  <section>
+    <h3>Api</h3>
+    <form action="#" th:action="@{/addapi}" th:object="${api}" method="post">
+      <div class="form-row">
+        <div class="col">
+          <label for="nome">Nome</label>
+          <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Nome">
+          <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        </div>
+        <div class="col">
+          <label for="urlBase">Url Base</label>
+          <input type="text" th:field="*{urlBase}" class="form-control" id="urlBase" placeholder="http://localhost:8080">
+          <span th:if="${#fields.hasErrors('urlBase')}" th:errors="*{urlBase}"></span>
+        </div>
+        <div class="col" style="margin-top: 33px;">
+          <input type="submit" class="btn btn-primary" value="Adicionar Api">
+        </div>
+      </div>
+    </form>
+  </section>
+
+
